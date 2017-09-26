@@ -1,0 +1,16 @@
+---
+title: "Hw02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Gapminder Data Exploration
+
+1. Smell test the data 
+```{r}
+
+```
+
