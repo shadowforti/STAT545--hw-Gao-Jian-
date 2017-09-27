@@ -1,8 +1,8 @@
 ---
 title: "Hw02"
 output:
-  md_document: default
   github_document: default
+  md_document: default
 ---
 
 ```{r setup, include=FALSE}
