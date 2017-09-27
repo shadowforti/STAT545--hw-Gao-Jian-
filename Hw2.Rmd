@@ -141,7 +141,24 @@ Sometimes, we want to look at the histogram of one variable
 ```{r}
 hist(gapminder$lifeExp)
 ```
-From this plot, we could see that 
+From this plot, we could see that most people have a life expectancy between 70-80. 
+
+##filter,select and %>%
+Sometimes we want to focus and zoom in to selected factors. The function filter and select would be handy in helping us archieve this goal. The filter and select function can help us to generate the statistical information we are looking for as well as the plot. 
+The filter function removes 
+For example, if I would like to focus my study on Canada in 2007 
+ 
+```{r}
+gapminder %>% 
+  filter(country %in% "Canada", year == 2007)
+```
+Ok. Now we want take one step further to look at gdp per captial for Canadaian above 60 
+
+```{r}
+gapminder %>% 
+  filter(country %in% "Canada", lifeExp>60)
+```
+
 
 
 
