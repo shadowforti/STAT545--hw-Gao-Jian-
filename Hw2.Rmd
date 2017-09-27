@@ -9,8 +9,142 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##Gapminder Data Exploration
 
-1. Smell test the data 
+First, install and load the gampminder and tidyverse package to start off with our data.
+
 ```{r}
+install.packages("gapminder")
+library(gapminder)
+install.packages("tidyverse")
+library(tidyverse)
 
 ```
+
+##Smell test the data 
+
+Before we do any analysis of our data, it is better to understand the properties of the data.We can simply check the data's properties by using R functions. 
+
+
+What is the type of the data? 
+```{r}
+typeof(gapminder)
+```
+
+What is the class of the data
+```{r}
+class(gapminder)
+```
+
+How many variables are present in the data? 
+```{r}
+ncol(gapminder)
+```
+How many observations do we have for each variable? 
+```{r}
+nrow(gapminder)
+```
+However, sometimes the data could be arranged different as variables could be in row and observation could be in column. So, we always want to check how the data is arranged as well as the range for the data by using the summary for an overview. 
+```{r}
+summary(gapminder)
+```
+Besides the summary of the data, we would sometimes also be interested the extent and size of the data. 
+
+For example, the dimsension of the data 
+```{r}
+dim(gapminder)
+```
+This function often combines the result of ncol and nrow. 
+
+Also, it is interested to know the strcuture of the data
+```{r}
+str(gapminder)
+```
+
+Sometimes we want to know what variables are present in our dataset
+```{r}
+names(gapminder)
+```
+Now, we know the what are the six varibles in the gapminder dataset. We can further explore the type of each varible just like what we did for the whole dataset. 
+```{r}
+typeof(gapminder$country)
+typeof(gapminder$continent)
+typeof(gapminder$year)
+typeof(gapminder$lifeExp)
+typeof(gapminder$pop)
+typeof(gapminder$gdpPercap)
+```
+By now, we have an overall glimpse of the structure of our dataset. This first step is crucial in developing further analysis of the data. From here, we would know what type of data is included and we could us this info to determine what type of plot to be used. Also, what variables are present. Are these variables relavent and interesting to our analysis. Also, by using the summary function, we could also know the range of dataset. 
+
+##Explore individual variables 
+
+After we have a genral overview of the whole dataset, we often would be interested in indivdual variables because sometimes we are interested in only certain varibales or we want to have more infomation about certain varibles for further analysis. 
+
+For example, if I am particular intesrested in the countries included in the dataset, I could use the summary function just like being used previously for the whole dataset. 
+```{r}
+summary(gapminder$country)
+```
+
+From this summary, we can see the countries being included in the dataset as well as how many entries. We can determine if the countries that we are interested are included in the dataset. 
+Since the variable country is character and not numerical, there would be not any numerical statistics in the summary and the table function would be identical to the summary. 
+```{r}
+table(gapminder$country)
+```
+However, if we are looking into other variables such as years or gdppercaptial, the result of summary would inculde statistic results.
+```{r}
+summary(gapminder$year)
+```
+The results display that the year 1952 is the minium in the data set and 2007 is the maxium. So we know that the data expands from 1952 to 2007. 
+
+```{r}
+table(gapminder$year)
+```
+The table function tells what years were included and how many entries are associated with each input years. From here we can also see the frequency of data collection. 
+
+We would also do one more variable analysis with gdppercapial. 
+```{r}
+summary(gapminder$gdpPercap)
+```
+From this chart, we could see the minium gdppercapital and the maxium gdppercapital. Also, we could also see the mean and median of gdppercapital, which was less interest in the previous year summary.
+We can also plot a histgram to see 
+```{r}
+hist(gapminder$gdpPercap)
+```
+From the histgram, we can see most countries in most years have gdppercaptial under 20000.
+Therefore, we can see that depneds on the types of variables, we can generate different information that suits the analysis the most. 
+
+##Explore various plot types 
+
+Most of times we want to have our data plotted in order to generate information about the trend of our data as well as to determine the relationship between two or multi-variables. 
+
+For example, if we want to know how would life expectancy correlates with different years. We can make a scatter plot between the two variables. 
+
+```{r}
+x <- ggplot(gapminder,aes(x=year, y=lifeExp))
+x + geom_point()
+```
+From the plot. we can see that life expectancy tends to increases from 1950s to 2007. In addition, we can introduce another varibale(continent) into this plot by adding colors.We can use geom_point function.  
+
+```{r}
+x+geom_point(size=3,aes(color=continent))
+```
+From this plot we could see that Africa has lower life expectany, whereas Europe has higher life expectancy. 
+
+Maybe you are particularly interested in certain countries gdppercapital growth thoughtout the 50 years. 
+
+```{r}
+y <- c("Canada","China","Angola","Japan")
+ggplot(subset(gapminder,country %in% y),aes(x=year,y=gdpPercap,color=country))+geom_line()+geom_point()
+
+```
+From this plot, we could see that Japan and Canada have much more drastic increase in gdp per capital compared with Angola and China. 
+
+Sometimes, we want to look at the histogram of one variable 
+```{r}
+hist(gapminder$lifeExp)
+```
+From this plot, we could see that 
+
+
+
+
+
 
