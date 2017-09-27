@@ -1,8 +1,9 @@
 ---
 title: "Hw02"
-output:
-  github_document: default
-  md_document: default
+output: html_document:  
+        keep_md: true
+        
+        
 ---
 
 ```{r setup, include=FALSE}
