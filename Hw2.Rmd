@@ -1,6 +1,12 @@
 ---
 title: "Hw02"
-output: html_document
+output:github_document
+
+
+
+
+
+
 ---
 
 ```{r setup, include=FALSE}
@@ -152,15 +158,65 @@ For example, if I would like to focus my study on Canada in 2007
 gapminder %>% 
   filter(country %in% "Canada", year == 2007)
 ```
-Ok. Now we want take one step further to look at gdp per captial for Canadaian above 60 
-
+Ok. Now we want to take one step further to look at how Canada has changed after the year 1967. 
 ```{r}
 gapminder %>% 
-  filter(country %in% "Canada", lifeExp>60)
+  filter(country %in% "Canada", year>1962)
+```
+We have seen that the life expectancy, population, and gdp per capital have all increased from 1967 to 2007. 
+
+It would be nice to depict the trend on a plot. 
+For example, if we want to make a plot of year vs life expanctancy of Canadians. We can use the filter function. 
+```{r}
+ggplot(gapminder %>% 
+         filter(country == "Canada"), aes(x = year, y = lifeExp)) + geom_line() + geom_point()
+```
+We can see that the life expectancy of Canadaian raised from around 69 to 81. 
+
+One more useful function of filter is that it can also remove all the unwanted data. 
+For example, if we want to see all countires except American countries. We can also use filter. 
+
+```{r}
+filter(gapminder,continent !="America")
 ```
 
+Select is another function being used for sorting data. Unlike filter, select will drop other result associate with the selected subject. This function is more specific. 
 
+Foe example 
+```{r}
+select(gapminder,country,year)
+```
 
+Only the variables inculded by select function is included in the result. This function could trim down the unneccessary data. 
+
+##Piping 
+
+Now, we can try combine filter and select functions and have only the data we are interested. 
+For exmaple, if we want to a look at how Chinese's life expectancy have changed from 50s to 2007. We can first filter to remove all other countries
+```{r}
+filter(gapminder, country == c("China")) %>%
+         select(year,lifeExp)
+  
+```
+The result only shows the selected year and life expectancy. Now, we want to plot the data. 
+```{r}
+filter(gapminder, country == c("China")) %>%
+  select(year, lifeExp) %>%
+  ggplot(aes(year, lifeExp)) + geom_line() + geom_point()
+```
+
+The result shows that around 1960, there is a decrease in life expectancy in China. We would like to verify if this affects the population of China. 
+
+```{r}
+filter(gapminder, country == c("China")) %>%
+  select(year, pop) %>%
+  ggplot(aes(year, pop)) + geom_line(color="red") + geom_point()
+```
+In this plot, we have found that around that thr 1960, the rate of population increase has decreased as the slope of the line is less steep. Something happend in China during that period, could be war, disaster or political reasons. 
+
+##Report me process 
+
+In this homework, I have learnt to determine the types of data and how to quickly acquire the basic and essentail information about hte data. In additon, I learnt how to plot various types of plots as well as how to pick the data related to the study.Thoses I found are particular helpful. I had a bot hard time in understanding the type of data. For example, matrice, data frames and list. Also, I am a bit confused about the function of the syntax %>%. 
 
 
 
