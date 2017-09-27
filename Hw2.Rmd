@@ -1,9 +1,8 @@
 ---
-title: "Hw02"
-output: html_document:  
-        keep_md: true
-        
-        
+    title: "Hw02"  
+    author: "Jian Gao"  
+    date: "2017/09/27"
+    output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -15,9 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 First, install and load the gampminder and tidyverse package to start off with our data.
 
 ```{r}
-install.packages("gapminder")
+install.packages("gapminder",repos = "http://cran.us.r-project.org")
 library(gapminder)
-install.packages("tidyverse")
+install.packages("tidyverse",repos = "http://cran.us.r-project.org")
 library(tidyverse)
 
 ```
