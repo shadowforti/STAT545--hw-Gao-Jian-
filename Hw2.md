@@ -14,7 +14,7 @@ install.packages("gapminder",repos = "http://cran.us.r-project.org")
 
     ## 
     ## The downloaded binary packages are in
-    ##  /var/folders/49/8x4vsmg52bg_f8qccj5r6pw00000gn/T//Rtmp9TXgPi/downloaded_packages
+    ##  /var/folders/49/8x4vsmg52bg_f8qccj5r6pw00000gn/T//RtmplD0PWF/downloaded_packages
 
 ``` r
 library(gapminder)
@@ -23,7 +23,7 @@ install.packages("tidyverse",repos = "http://cran.us.r-project.org")
 
     ## 
     ## The downloaded binary packages are in
-    ##  /var/folders/49/8x4vsmg52bg_f8qccj5r6pw00000gn/T//Rtmp9TXgPi/downloaded_packages
+    ##  /var/folders/49/8x4vsmg52bg_f8qccj5r6pw00000gn/T//RtmplD0PWF/downloaded_packages
 
 ``` r
 library(tidyverse)
