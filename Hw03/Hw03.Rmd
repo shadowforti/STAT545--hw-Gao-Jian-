@@ -80,3 +80,25 @@ ggplot(z, aes(x=year, y = tmeanlifeExp,fill=z$year)) + geom_bar(stat="identity")
 
 The life expectancy has increase almost 20 years in 50 years. 
 
+##Task 4: How is life expectancy changing over time on different continents?
+
+In this task, we want to use the mean life expectancy for each continent to observe the overal change in each continent. 
+
+```{r}
+conti <- gapminder%>%
+  group_by(continent,year)%>%
+  summarize(mean_conti=mean(lifeExp))%>%
+  select(continent,year,mean_conti)
+knitr::kable(conti)
+
+```
+This table shows the mean life expectacny of each continent at different year. We want to plot it into graph.
+```{r}
+ggplot(subset(conti),aes(x=year,y=mean_conti,color=continent))+geom_line()
+```
+From the plot, we have seen that all continent have increased life expectancy. Africa has the most significant increase. 
+
+##Report your progress 
+
+In this assignment, I have leanrt more about data manipulation and plotting. However, I need to learn more about how to change the detail of the plot, for example, how to add titles etc. 
+
