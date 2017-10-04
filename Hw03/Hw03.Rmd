@@ -90,9 +90,10 @@ conti <- gapminder%>%
   summarize(mean_conti=mean(lifeExp))%>%
   select(continent,year,mean_conti)
 knitr::kable(conti)
-
 ```
+
 This table shows the mean life expectacny of each continent at different year. We want to plot it into graph.
+
 ```{r}
 ggplot(subset(conti),aes(x=year,y=mean_conti,color=continent))+geom_line()
 ```
