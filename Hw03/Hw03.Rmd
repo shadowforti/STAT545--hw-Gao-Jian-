@@ -71,7 +71,7 @@ In this task, we want to do a trimmed mean.The trimmed mean removes skewed point
 ```{r}
 z <- gapminder%>%
   select(year,lifeExp)%>%
-  summarise_all(funs(mean(lifeExp, trim=0.05)), lifeExp)
+  summarise_each(funs(mean(lifeExp, trim=0.05)))
 z
 ggplot(z, aes(x=year, y = lifeExp,fill=z$year)) + geom_bar(stat="identity")
 
