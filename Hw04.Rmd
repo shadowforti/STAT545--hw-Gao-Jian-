@@ -1,0 +1,11 @@
+---
+title: "Hw04"
+output: Github_document 
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+

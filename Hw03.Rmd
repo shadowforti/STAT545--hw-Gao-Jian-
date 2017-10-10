@@ -1,0 +1,108 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##Homework 03: Use dplyr and ggplot2 to manipulate and explore data
+
+In this homework, we will be further develope the functions of dplyr and ggplot2 on the Gapminder data set. Specific questions will be used as examples to demonstrate how we can use dplyr and ggplot2. 
+
+First of all, we have to load our data set and necessary packages
+```{r}
+install.packages("gapminder",repos = "http://cran.us.r-project.org")
+install.packages("tidyverse",repos = "http://cran.us.r-project.org")
+install.packages("knitr",repos = "http://cran.us.r-project.org")
+library(gapminder)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+##Task 1: The maximum and minimum of GDP per capita for all continents
+
+To solve this question, we first want to pull out the information about the maxium and minium GDP per capita of each continent. A table would be help for showing this information. 
+
+```{r}
+x <- gapminder %>%
+  group_by(continent) %>%
+  summarize(max_gdp = max(gdpPercap),min_gdp = min(gdpPercap))
+x
+```
+Here we get the max and min gdp per capital of each continent. However, if we want the table to be neat or want to publish it we can use the knitr:kable function 
+
+```{r}
+knitr::kable(x)
+
+```
+Now, we would like to depict the data in graph by using ggplot 
+
+First, we will show the maxium gdp per capita in histogram 
+
+```{r}
+ggplot(x,aes(x=continent,y=max_gdp)) + geom_bar(stat="identity")
+```
+We can see that Asia has the maxium gdp per capital. We will then show the minium gpd per capital but with color.
+```{r}
+ggplot(x,aes(x=continent,y=min_gdp, fill=x$continent)) + geom_bar(stat="identity")
+```
+
+From this graph, we see that Africa and Asia has low gdp per capita. Combine both of the plots, we can see that Asia has a diverse gdp per capita range. 
+
+##Task 2: Look at the spread of GDP per capita within the continents
+Sometimes table could be too lengthy and massy for summarize big data results. For exapmle, in this Task, it would be difficult to look at the spread of GDP per capita in the table form. It would be much better to pick the graphical option. 
+
+We would do this by each continent 
+
+```{r}
+y <- gapminder%>%
+  group_by(continent)
+ggplot(y,aes(x=gdpPercap))+facet_wrap(~ continent)+geom_histogram() 
+```
+We see that in Asia and Africa, most contries have low gdp per capita where as in America, Europe and Oceania, the distrubution mostly in the middle. 
+
+
+##Task 3: Compute a trimmed mean of life expectancy for different years
+
+In this task, we want to do a trimmed mean.The trimmed mean removes skewed points to make the mean more accurate.Let's set the data to 5% trimmed mean. 
+
+```{r}
+z <- gapminder%>%
+  group_by(year,lifeExp)%>%
+  summarise(tmeanlifeExp= mean(lifeExp,trim=0.05))%>%
+  select(year,tmeanlifeExp)
+
+ggplot(z, aes(x=year, y = tmeanlifeExp,fill=z$year)) + geom_bar(stat="identity")
+
+```
+
+The life expectancy has increase almost 20 years in 50 years. 
+
+##Task 4: How is life expectancy changing over time on different continents?
+
+In this task, we want to use the mean life expectancy for each continent to observe the overal change in each continent. 
+
+```{r}
+conti <- gapminder%>%
+  group_by(continent,year)%>%
+  summarize(mean_conti=mean(lifeExp))%>%
+  select(continent,year,mean_conti)
+knitr::kable(conti)
+```
+
+
+
+This table shows the mean life expectacny of each continent at different year. We want to plot it into graph.
+
+
+```{r}
+ggplot(subset(conti),aes(x=year,y=mean_conti,color=continent))+geom_line()
+```
+From the plot, we have seen that all continent have increased life expectancy. Africa has the most significant increase. 
+
+##Report your progress 
+
+In this assignment, I have leanrt more about data manipulation and plotting. However, I need to learn more about how to change the detail of the plot, for example, how to add titles etc. 
+
