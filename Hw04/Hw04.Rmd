@@ -103,7 +103,8 @@ knitr::kable(breed)
 
 The mission is combine the two data frames into one in various styles by using the dplyr join function. 
 
-#1. Inner_join 
+
+## 1. Inner_join 
 
 Inner join is useful in combining the two data frame together. The format of inner join is inner_join(x,y). In this case, x will be the main data frame and y will be the adding frame. In other words, the format of X will not change but y will be added into x according to x's format. 
 
@@ -124,7 +125,7 @@ knitr::kable(dogsample2)
 Now, we see that data from y will be added according to x's format. 
 
 
-##2. Semi_join 
+## 2. Semi_join 
 
 Next, there is semi_join. Semi join differs from inner_join as not column besides the common column will be included in the final result. For example 
 
@@ -134,7 +135,7 @@ knitr::kable(dogsample3)
 ```
 
 
-##3. Left_join 
+## 3. Left_join 
 
 Left_join includes all the matching pairs as well as the non-paired. In other word, all the data will be included in the joined version. 
 
@@ -145,7 +146,7 @@ knitr::kable(dogsample4)
 
 In this case, left_join provides a more thorough join. 
 
-##4. Anti_join 
+## 4. Anti_join 
 
 Anti_join includes non-paired join. We can use this function to filter for the data that present only in one of the data frame. 
 
