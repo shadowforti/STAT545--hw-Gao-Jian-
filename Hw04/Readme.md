@@ -11,6 +11,8 @@ The problem I have encounter during this homework practice:
 
 
 The links that guided me throught this homework: 
-https://www.youtube.com/watch?v=RbUWwuJeUC8  for tidyr's unite and seperate functions 
+https://www.youtube.com/watch?v=RbUWwuJeUC8  for tidyr's unite and seperate functions  
+
 https://github.com/jennybc/lotr-tidy also for tidyr's gather and spread functions
+
 http://stat545.com/bit001_dplyr-cheatsheet.html#inner_joinpublishers-superheroes for join functions. 
