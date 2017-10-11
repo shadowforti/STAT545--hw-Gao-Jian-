@@ -1,11 +1,100 @@
 ---
 title: "Hw04"
-output: Github_document 
+output: github_document 
 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Homework 4
+
+## Part 1, Prompt 1: Jian's tidyr cheatsheet
+
+Sometimes our data could be either too messy or too genralized that we cannot analyze the properly. Sometimes, we want to make certain plots but the varibles is not directly presented that R could understand. Therefore, we need to reshape our data frame so that we could have the information we needed to poeperly analyze the data. 
+**Gather** and **Spread** are two useful tools in tidyr in helping us reshape our data. Both functions will create new columns that either combines variables into one (make the data frame longer) or split one varible into many varibles(make the data frame wider). 
+
+## Format 
+The format of gather and spread is:
+data.frame %>% gather/spread(key,value,...)
+
+**Key** will be the header(s) for the new columns that include previous variable headers
+**Value** will be the header(s) for the new columns that include previous varibale observations
+**...** will be the reshaping criterias, what include and what not include. 
+
+I will use gapminder data to demonstrate how gather and spread could be used. 
+
+Let's say we want to know the total GDP of Canada and China. 
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+```{r}
+example1 <- gapminder %>% 
+  filter(country %in% c("China","Canada"))%>%
+  select(gdpPercap,pop,year,country)%>%
+  mutate(gdp_billions=gdpPercap*pop/1000000000)%>%
+  select(gdp_billions,year,country)
+
+knitr::kable(example1)
+```
+
+
+
+
+
+This would be how the data table looks like by default. However, if I want to compare the GDP between the two countries at each individual years, it would be much easier to reshape the lengthy table according to years by using the spread function. 
+
+```{r}
+example1spread <- spread(example1,year,gdp_billions)
+knitr::kable(example1spread)
+```
+
+
+We can also categorize the columns based on country 
+
+```{r}
+example2spread <- spread(example1,country,gdp_billions)
+knitr::kable(example2spread)
+```
+
+Now, it is much easier to compare the data. 
+
+The gather function makes the table longer by combining variables.For example, if I want to make GDP of China and Canada into one column and specify the country and one column specify the GDP, I could use gather.
+
+```{r}
+example1gather <- gather(example2spread,country,gdp_billions,Canada,China)
+knitr::kable(example1gather)
+```
+
+
+We could also merge two variable into one column by **unite**
+
+```{r}
+example1unite <- unite(example1,"Country_year",c(country,year),sep = ",")
+knitr::kable(example1unite)
+```
+
+
+On the other hand, we could also seperate one column into two columns by **seperate**
+
+```{r}
+example1seperate <- separate(example1unite,Country_year,c("Country","year"),sep = ",")
+knitr::kable(example1seperate)
+
+```
+
+
+## Part 2, Prompt 2: Jian's joinging cheatsheet
+
+In this section, I have created two csv file about dogs to be my example. 
+
+
+
+
+
 
 
