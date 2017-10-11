@@ -92,6 +92,70 @@ knitr::kable(example1seperate)
 
 In this section, I have created two csv file about dogs to be my example. 
 
+First, I will load the data. 
+
+```{r}
+dog <- read_csv("~/Desktop/Stat 545/dog1.csv")
+breed <- read_csv("~/Desktop/Stat 545/dog2.csv")
+knitr::kable(dog)
+knitr::kable(breed)
+```
+
+The mission is combine the two data frames into one in various styles by using the dplyr join function. 
+
+#1. Inner_join 
+
+Inner join is useful in combining the two data frame together. The format of inner join is inner_join(x,y). In this case, x will be the main data frame and y will be the adding frame. In other words, the format of X will not change but y will be added into x according to x's format. 
+
+```{r}
+dogsample1 <- inner_join(dog,breed)
+knitr::kable(dogsample1)
+```
+ 
+
+In this case, x is dog and y is breed data. The arrangement of dog data did not change but the breed data is added into dog data according to the common column "breed group". However, since there is no "hound" in the breed file, we have lost beagle in the joined frame. Let's try what will the table looks like if we use breed as x and dog to be y. 
+
+```{r}
+dogsample2 <- inner_join(breed,dog)
+knitr::kable(dogsample2)
+```
+
+
+Now, we see that data from y will be added according to x's format. 
+
+
+##2. Semi_join 
+
+Next, there is semi_join. Semi join differs from inner_join as not column besides the common column will be included in the final result. For example 
+
+```{r}
+dogsample3 <- semi_join(dog,breed)
+knitr::kable(dogsample3)
+```
+
+
+##3. Left_join 
+
+Left_join includes all the matching pairs as well as the non-paired. In other word, all the data will be included in the joined version. 
+
+```{r}
+dogsample4 <- left_join(dog,breed)
+knitr::kable(dogsample4)
+```
+
+In this case, left_join provides a more thorough join. 
+
+##4. Anti_join 
+
+Anti_join includes non-paired join. We can use this function to filter for the data that present only in one of the data frame. 
+
+```{r}
+dogsample5 <- anti_join(dog,breed)
+knitr::kable(dogsample5)
+```
+
+By utilizing these join functions, we can glue together the information we actually will be focus on and filter out the unneccessary data. 
+
 
 
 
