@@ -141,18 +141,17 @@ Now, let's try make our plot prettier. There are many things we can do to improv
 Let's use Canada and China's gdp per capita trend as the example 
 
 ```{r}
-Canada_China_gdp <- gapminder %>%
+Canada_China_gdp1 <- gapminder %>%
   filter(country == c("Canada","China"))
-ggplot(Canada_gdp, aes(x= year, y= gdpPercap)) + geom_point()
+ggplot(Canada_China_gdp1, aes(x= year, y= gdpPercap)) + geom_point()
 ```
 
 
 This is the most simplistic plot to show the information. Now, let's make some improvements. 
 
 ```{r}
-Canada_gdp <- gapminder %>%
-  filter(country == c("Canada","China"))
-ggplot(Canada_gdp, aes(x= year, y= gdpPercap, fill=country, color = country)) + geom_point() + ggtitle("GDP per Capitia Growth of China and Canada") + geom_line()
+ggplot(Canada_China_gdp1, aes(x= year, y= gdpPercap, fill=country, color = country)) + geom_point() + ggtitle("GDP per Capitia Growth of China and Canada") + geom_line()
+
 ```
 
 Ok. Now we have a much nicer plot with color, legend and title. 
